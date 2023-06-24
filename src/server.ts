@@ -1,13 +1,11 @@
 import express from 'express';
+import { router } from './app/routes/router';
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 app.use(express.json());
-
-app.get('/', (req, res) => {
-  res.send('Página Home');
-})
+app.use(router);
 
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
