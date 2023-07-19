@@ -1,11 +1,11 @@
 import { prisma } from './../../../service/database';
 import { Request, Response } from "express";
 
-export async function deleteUser(req: Request, res: Response){
+export async function deleteDocumento(req: Request, res: Response){
   const { id } = req.params;
   
-  const user = await prisma.usuario.delete({
+  const user = await prisma.documento.delete({
    where : { id : parseInt(id)}
   });
-  res.json('User deleted successfully');
+  res.json('Documento deleted successfully');
 }

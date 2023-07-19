@@ -5,13 +5,13 @@ import { prisma } from "../../../service/database";
 export async function createUser(req: Request, res: Response) {
 
   try {
-    const { name, email, password } = req.body;
+    const { nome, email, password } = req.body;
     
     const senha = await hash(password, 10);
      
-    const response = await prisma.user.create({
+    const response = await prisma.usuario.create({
       data: {
-        name,
+        nome,
         email,
         senha
       }

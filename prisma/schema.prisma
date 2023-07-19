@@ -10,14 +10,40 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user {
-  id    Int    @id @default(autoincrement())
-  email String @unique
-  name  String
-  senha String
-}
-
-model tipos_documentos {
+model Documento {
   id        Int    @id @default(autoincrement())
   descricao String @unique
+
+  @@map("tipo_de_documentos")
+}
+
+model Unidade {
+  id        Int     @id @default(autoincrement())
+  descricao String  @unique
+  Orgao     Orgao[]
+
+  @@map("unidade_orcamentaria")
+}
+
+model Orgao {
+  id          Int    @id @default(autoincrement())
+  descricao   String @unique
+  cpf         String
+  responsavel String
+  expediente  String
+  cod_orgao   Int
+  unidadeId   Int
+
+  unidade_orcamentaria Unidade @relation(fields: [unidadeId], references: [id])
+
+  @@map("orgao")
+}
+
+model Usuario {
+  id    Int    @id @default(autoincrement())
+  nome  String
+  email String @unique
+  senha String
+
+  @@map("usuario")
 }
